@@ -1,16 +1,15 @@
-<% title "Blog" %>
+<p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <b>Name:</b>
   <%= @blog.name %>
 </p>
+
 <p>
-  <strong>Body:</strong>
+  <b>Body:</b>
   <%= @blog.body %>
 </p>
 
-<p>
-  <%= link_to "Edit", edit_blog_path(@blog) %> |
-  <%= link_to "Destroy", @blog, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", blogs_path %>
-</p>
+
+<%= link_to 'Edit', edit_blog_path(@blog) %> |
+<%= link_to 'Back', blogs_path %>

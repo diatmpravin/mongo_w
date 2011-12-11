@@ -1,54 +1,49 @@
 require 'test_helper'
 
 class BlogsControllerTest < ActionController::TestCase
-  def test_index
+  setup do
+    @blog = blogs(:one)
+  end
+
+  test "should get index" do
     get :index
-    assert_template 'index'
+    assert_response :success
+    assert_not_nil assigns(:blogs)
   end
 
-  def test_show
-    get :show, :id => Blog.first
-    assert_template 'show'
-  end
-
-  def test_new
+  test "should get new" do
     get :new
-    assert_template 'new'
+    assert_response :success
   end
 
-  def test_create_invalid
-    Blog.any_instance.stubs(:valid?).returns(false)
-    post :create
-    assert_template 'new'
+  test "should create blog" do
+    assert_difference('Blog.count') do
+      post :create, :blog => @blog.attributes
+    end
+
+    assert_redirected_to blog_path(assigns(:blog))
   end
 
-  def test_create_valid
-    Blog.any_instance.stubs(:valid?).returns(true)
-    post :create
-    assert_redirected_to blog_url(assigns(:blog))
+  test "should show blog" do
+    get :show, :id => @blog.to_param
+    assert_response :success
   end
 
-  def test_edit
-    get :edit, :id => Blog.first
-    assert_template 'edit'
+  test "should get edit" do
+    get :edit, :id => @blog.to_param
+    assert_response :success
   end
 
-  def test_update_invalid
-    Blog.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => Blog.first
-    assert_template 'edit'
+  test "should update blog" do
+    put :update, :id => @blog.to_param, :blog => @blog.attributes
+    assert_redirected_to blog_path(assigns(:blog))
   end
 
-  def test_update_valid
-    Blog.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => Blog.first
-    assert_redirected_to blog_url(assigns(:blog))
-  end
+  test "should destroy blog" do
+    assert_difference('Blog.count', -1) do
+      delete :destroy, :id => @blog.to_param
+    end
 
-  def test_destroy
-    blog = Blog.first
-    delete :destroy, :id => blog
-    assert_redirected_to blogs_url
-    assert !Blog.exists?(blog.id)
+    assert_redirected_to blogs_path
   end
 end

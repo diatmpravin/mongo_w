@@ -1,12 +1,69 @@
-<%= form_for @blog do |f| %>
-  <%= f.error_messages %>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
-  </p>
-  <p><%= f.submit %></p>
-<% end %>
+<table width="100%" bgcolor="#9999ff">
+	<tr>
+		<td width="40%" align="center" bgcolor="#99cc66">
+			<%= form_for(@blog) do |f| %>
+			<% if @blog.errors.any? %>
+			<div id="error_explanation">
+			  <h2><%= pluralize(@blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
+
+			  <ul>
+			  <% @blog.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			  <% end %>
+			  </ul>
+			</div>
+		  <% end %>
+
+		  <div class="field">
+			<%= f.label :name %><br />
+			<%= f.text_field :name %>
+		  </div>
+		  <div class="field">
+			<%= f.label :body %><br />
+			<%= f.text_field :body %>
+		  </div>
+		  <div class="actions">
+			<%= f.submit %>
+			<%= link_to image_tag("btn_add_up.png"), "#", :id=>"addNewBlog" %>
+		  </div>
+			<% end %>
+		</td>
+		<td width="20%" align="center" bgcolor="#999fff"></td>
+		<td width="40%" align="center" bgcolor="#99ffff">
+			<h1>Listing blogs</h1>
+
+			<table>
+			  <tr>
+				<th>Sl.</th>
+				<th>Name</th>
+				<th>Body</th>
+				<th></th>
+				<th></th>
+				<th></th>
+			  </tr>
+			<% sl=1 %>
+			<% @blogs.each do |blog| %>
+			  <tr>
+			    <td><%= sl %></td>
+				<td><%= blog.name %></td>
+				<td><%= blog.body %></td>
+				<td><%= link_to image_tag("icon_edit.png"), edit_blog_path(blog) %></td>
+				<td></td>
+				<td><%= link_to image_tag("icon_decline.png"), blog, :confirm => 'Are you sure?', :method => :delete %></td>
+				<% sl+=1 %>
+			  </tr>
+			<% end %>
+			</table>
+
+			<br />
+		</td>
+	</tr>
+</table>
+
+<script>
+	$(document).ready(function(){
+		$("#addNewBlog").click(function(){
+			alert("Testing");
+		});
+	});
+</script>

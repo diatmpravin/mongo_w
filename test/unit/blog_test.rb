@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class BlogTest < ActiveSupport::TestCase
-  def test_should_be_valid
-    assert Blog.new.valid?
-  end
+  # test "the truth" do
+  #   assert true
+  # end
 end

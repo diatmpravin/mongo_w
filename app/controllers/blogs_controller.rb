@@ -1,41 +1,77 @@
 class BlogsController < ApplicationController
+  # GET /blogs
+  # GET /blogs.json
   def index
     @blogs = Blog.all
-  end
 
-  def show
-    @blog = Blog.find(params[:id])
-  end
-
-  def new
-    @blog = Blog.new
-  end
-
-  def create
-    @blog = Blog.new(params[:blog])
-    if @blog.save
-      redirect_to @blog, :notice => "Successfully created blog."
-    else
-      render :action => 'new'
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render :json => @blogs }
     end
   end
 
+  # GET /blogs/1
+  # GET /blogs/1.json
+  def show
+    @blog = Blog.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render :json => @blog }
+    end
+  end
+
+  # GET /blogs/new
+  # GET /blogs/new.json
+  def new
+	 @blogs = Blog.all
+    @blog = Blog.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render :json => @blog }
+    end
+  end
+
+  # GET /blogs/1/edit
   def edit
     @blog = Blog.find(params[:id])
   end
 
+  # POST /blogs
+  # POST /blogs.json
+  def create
+   @blog = Blog.new(params[:blog])
+   @blog.save
+   redirect_to :action => "new"
+  end
+
+  # PUT /blogs/1
+  # PUT /blogs/1.json
   def update
     @blog = Blog.find(params[:id])
-    if @blog.update_attributes(params[:blog])
-      redirect_to @blog, :notice  => "Successfully updated blog."
-    else
-      render :action => 'edit'
+
+    respond_to do |format|
+      if @blog.update_attributes(params[:blog])
+        format.html { redirect_to @blog, :notice => 'Blog was successfully updated.' }
+        format.json { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.json { render :json => @blog.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
+  # DELETE /blogs/1
+  # DELETE /blogs/1.json
   def destroy
     @blog = Blog.find(params[:id])
     @blog.destroy
-    redirect_to blogs_url, :notice => "Successfully destroyed blog."
+
+    redirect_to :action => "new"
+  end
+  
+  def blogCreate
+	raise "aaaa"
   end
 end

@@ -1,3 +1,5 @@
-class Blog < ActiveRecord::Base
-  attr_accessible :name, :body
+class Blog
+  include Mongoid::Document
+  field :name, :type => String
+  field :body, :type => String
 end
