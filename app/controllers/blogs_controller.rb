@@ -1,6 +1,11 @@
 class BlogsController < ApplicationController
   # GET /blogs
   # GET /blogs.json
+  
+  def addClass
+  
+  end
+  
   def index
     @blogs = Blog.all
 

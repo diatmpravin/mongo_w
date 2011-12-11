@@ -15,6 +15,9 @@ MongoW::Application.routes.draw do
   resources :blogs do
 	collection do
 		get "blogCreate"
+		get "addClass"
+		get "add"
+		get "after"
 	end
  end
 
