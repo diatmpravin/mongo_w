@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @validatiion.name %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @validatiion.phone %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @validatiion.email %>
+</p>
+
+
+<%= link_to 'Edit', edit_validatiion_path(@validatiion) %> |
+<%= link_to 'Back', validatiions_path %>

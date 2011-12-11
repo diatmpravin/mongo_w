@@ -1,0 +1,64 @@
+
+<%= form_for :validatiion, :url => {:controller=> "validatiions",:action => "create"},:html=>{:multipart => true, :name => "newproject_form", :onSubmit => "return validate_form_fields(this);"} do |f| -%>  
+  <% if @validatiion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@validatiion.errors.count, "error") %> prohibited this validatiion from being saved:</h2>
+
+      <ul>
+      <% @validatiion.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+	<div id="name"></div>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone %>
+	<div id="phone"></div>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+	<div id="email"></div>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+
+<script language="javascript" type="text/javascript">
+	function validate_form_fields()
+	{
+		alert("hiiiiiiiiiii");
+		if(document.newproject_form.validatiion_name.value=="")
+		{
+			alert("hi");
+			document.getElementById("name").innerHTML="<font color=\"#FF0000\">Please enter your Name</font>";
+			document.newproject_form.validatiion_name.focus();
+			alert("hi");
+			return false;
+		}
+		
+		if(document.newproject_form.validatiion_phone.value=="")
+		{
+			document.getElementById("phone").innerHTML="<font color=\"#FF0000\">Please enter your Contact No</font>";
+			document.newproject_form.validatiion_phone.focus();
+			return false;
+		}
+		
+		if(document.newproject_form.validatiion_email.value=="")
+		{
+			document.getElementById("email").innerHTML="<font color=\"#FF0000\">Please enter your Comments</font>";
+			document.newproject_form.validatiion_email.focus();
+			return false;
+		}
+	}
+</script> 

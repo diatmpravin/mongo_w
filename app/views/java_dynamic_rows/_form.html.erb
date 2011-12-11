@@ -1,0 +1,73 @@
+<%= form_for(@java_dynamic_row) do |f| %>
+  <% if @java_dynamic_row.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@java_dynamic_row.errors.count, "error") %> prohibited this java_dynamic_row from being saved:</h2>
+
+      <ul>
+      <% @java_dynamic_row.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <div id="hidden" style="display:none;">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %><input type="button" value="Remove" id="re">
+  </div>
+  
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %><input type="button" value="Add" id="ad">
+  </div>	
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<script type="text/javascript">
+	$('#ad').click(function() {
+		//$("hidden").add();
+		$("#hidden").show("slow");
+	});
+	
+	$('#re').click(function() {
+		$("#hidden").hide("fast"); 
+	});
+</script>
+
+
+
+
+
+
+
+
+<div id="p_scents">
+    <p>
+        <label for="p_scnts"><input type="text" id="p_scnt" size="20" name="p_scnt" value="" placeholder="Input Value" /></label><a href="#" id="addScnt">Add Another Input Box</a>
+    </p>
+</div>
+
+
+<script type="text/javascript">
+	$(function() {
+        var scntDiv = $('#p_scents');
+        var i = $('#p_scents p').size() + 1;
+		
+		        $('#addScnt').live('click', function() {
+                $('<p><label for="p_scnts"><input type="text" id="p_scnt" size="20" name="p_scnt_' + i +'" value="" placeholder="Input Value" /></label> <a href="#" id="remScnt">Remove</a></p>').appendTo(scntDiv);
+                i++;
+                return false;
+        });
+
+        $('#remScnt').live('click', function() {
+                if( i > 2 ) {
+                        $(this).parents('p').remove();
+                        i--;
+                }
+                return false;
+        });
+});
+</script>

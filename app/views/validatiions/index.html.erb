@@ -1,0 +1,27 @@
+<h1>Listing validatiions</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>Email</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @validatiions.each do |validatiion| %>
+  <tr>
+    <td><%= validatiion.name %></td>
+    <td><%= validatiion.phone %></td>
+    <td><%= validatiion.email %></td>
+    <td><%= link_to 'Show', validatiion %></td>
+    <td><%= link_to 'Edit', edit_validatiion_path(validatiion) %></td>
+    <td><%= link_to 'Destroy', validatiion, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Validatiion', new_validatiion_path %>
